@@ -563,19 +563,27 @@ section { padding: 88px 0; }
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: none;
 }
 .slot-photo.is-loaded { opacity: 1; }
+.hero-art[data-image-slot] > svg,
+.occasion-art[data-image-slot] > svg,
+.gallery-art[data-image-slot] > svg,
+.about-art[data-image-slot] > svg {
+  visibility: hidden;
+}
+.hero-art.photo-fallback > svg,
+.occasion-art.photo-fallback > svg,
+.gallery-art.photo-fallback > svg,
+.about-art.photo-fallback > svg {
+  visibility: visible;
+}
 .slot-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-@media (prefers-reduced-motion: reduce) {
-  .slot-photo { transition: none; }
-}
-
 /* ---------- Lightbox ---------- */
 .lightbox {
   position: fixed;

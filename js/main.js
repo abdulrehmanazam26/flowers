@@ -22,15 +22,20 @@
     img.alt = photo.alt || "";
     img.width = photo.width;
     img.height = photo.height;
-    img.loading = photo.priority ? "eager" : "lazy";
+    /* Load every visible site photo up front. The old lazy-loading setup left
+       the SVG placeholder on screen until a visitor scrolled to each card,
+       which made the artwork visibly switch to a different image. */
+    img.loading = "eager";
     img.decoding = "async";
     if (photo.priority) img.setAttribute("fetchpriority", "high");
 
     img.addEventListener("error", function () {
+      container.classList.add("photo-fallback");
       picture.remove();
     }, { once: true });
     img.addEventListener("load", function () {
       picture.classList.add("is-loaded");
+      container.classList.add("photo-ready");
     }, { once: true });
 
     picture.appendChild(img);
